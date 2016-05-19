@@ -7,14 +7,120 @@
 //
 
 #import "AppDelegate.h"
-
+#import "User.h"
+#import "Place.h"
+#import "Rating.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
 
+//get user
+-(NSArray*)getUserByLogin:(NSString*) login andPassword: (NSString*) password
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(login == %@ && password == %@)", login,password]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if([fetchedRecords count] == 0)
+    {
+        return nil;
+    }
+    else
+    {
+        return fetchedRecords[0];
+    }
+    
+}
 
+//add user or false if noy unique
+-(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: email
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(login == %@)", login]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if([fetchedRecords count] != 0)
+    {
+        return false;
+    }
+    
+    User * newUser = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+    newUser.login = login;
+    newUser.password = password;
+    newUser.email = email;
+    [self saveContext];
+    return true;
+}
+
+-(void) addPlaceByLocation: (NSString*) location andLatitude: (int) latitude andLongitude:(int) longitude
+{
+    Place * newPlace = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    newPlace.latitude = [NSNumber numberWithInt: latitude];
+    newPlace.longitude = [NSNumber numberWithInt: longitude];
+    newPlace.location = location;
+    [self saveContext];
+    
+}
+-(void) addPhoto: (NSData*) photo ByPlace: (Place*) place
+{
+    NSMutableSet* pictures =  [place mutableSetValueForKey:@"pictures"];
+    [pictures addObject:photo];
+    [self saveContext];
+}
+-(void) addRating: (int) rating ByPlace: (Place*) place andUser:(User*) user
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(place == %@ && user == %@)", place, user]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rating" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *marks = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    if([marks count]!=0)
+    {
+        [marks[0] setValue: [NSNumber numberWithInt: rating] forKey: @"rating"];
+        [self saveContext];
+        return;
+    }
+    Rating * newRating = [NSEntityDescription insertNewObjectForEntityForName:@"Rating" inManagedObjectContext:self.managedObjectContext];
+    newRating.rating = [NSNumber numberWithInt: rating];
+    [newRating setValue: place forKey:@"place"];
+    [newRating setValue: user forKey:@"user"];
+    
+    [self saveContext];	
+}
+-(NSArray*)getAllPlaces
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedRecords;
+}
+-(NSArray*)getPlacesMarkedByUser:(User*) user
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", user]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedRecords;
+}
+
+
+//
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     return YES;
