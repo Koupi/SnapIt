@@ -16,6 +16,10 @@
 		84E55B861CEDDA8C004E8962 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E55B841CEDDA8C004E8962 /* LaunchScreen.storyboard */; };
 		84E55B911CEDDA8C004E8962 /* SnapItTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E55B901CEDDA8C004E8962 /* SnapItTests.m */; };
 		84E55B9C1CEDDA8C004E8962 /* SnapItUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E55B9B1CEDDA8C004E8962 /* SnapItUITests.m */; };
+		D0CE07A01CEDE1B000ECEC78 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE079F1CEDE1B000ECEC78 /* Place.m */; };
+		D0CE07A31CEDE1B000ECEC78 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE07A21CEDE1B000ECEC78 /* User.m */; };
+		D0CE07A61CEDE1B000ECEC78 /* Rating.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE07A51CEDE1B000ECEC78 /* Rating.m */; };
+		D0CE07A91CEDE1B000ECEC78 /* Picture.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE07A81CEDE1B000ECEC78 /* Picture.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,14 @@
 		84E55B971CEDDA8C004E8962 /* SnapItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E55B9B1CEDDA8C004E8962 /* SnapItUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapItUITests.m; sourceTree = "<group>"; };
 		84E55B9D1CEDDA8C004E8962 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0CE079E1CEDE1B000ECEC78 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		D0CE079F1CEDE1B000ECEC78 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		D0CE07A11CEDE1B000ECEC78 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		D0CE07A21CEDE1B000ECEC78 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		D0CE07A41CEDE1B000ECEC78 /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
+		D0CE07A51CEDE1B000ECEC78 /* Rating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rating.m; sourceTree = "<group>"; };
+		D0CE07A71CEDE1B000ECEC78 /* Picture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Picture.h; sourceTree = "<group>"; };
+		D0CE07A81CEDE1B000ECEC78 /* Picture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Picture.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +124,14 @@
 				84E55B841CEDDA8C004E8962 /* LaunchScreen.storyboard */,
 				84E55B871CEDDA8C004E8962 /* Info.plist */,
 				84E55B7F1CEDDA8C004E8962 /* SnapIt.xcdatamodeld */,
+				D0CE07A71CEDE1B000ECEC78 /* Picture.h */,
+				D0CE07A81CEDE1B000ECEC78 /* Picture.m */,
+				D0CE07A41CEDE1B000ECEC78 /* Rating.h */,
+				D0CE07A51CEDE1B000ECEC78 /* Rating.m */,
+				D0CE07A11CEDE1B000ECEC78 /* User.h */,
+				D0CE07A21CEDE1B000ECEC78 /* User.m */,
+				D0CE079E1CEDE1B000ECEC78 /* Place.h */,
+				D0CE079F1CEDE1B000ECEC78 /* Place.m */,
 				84E55B731CEDDA8C004E8962 /* Supporting Files */,
 			);
 			path = SnapIt;
@@ -273,9 +293,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CE07A91CEDE1B000ECEC78 /* Picture.m in Sources */,
+				D0CE07A01CEDE1B000ECEC78 /* Place.m in Sources */,
 				84E55B7B1CEDDA8C004E8962 /* ViewController.m in Sources */,
+				D0CE07A31CEDE1B000ECEC78 /* User.m in Sources */,
 				84E55B781CEDDA8C004E8962 /* AppDelegate.m in Sources */,
 				84E55B811CEDDA8C004E8962 /* SnapIt.xcdatamodeld in Sources */,
+				D0CE07A61CEDE1B000ECEC78 /* Rating.m in Sources */,
 				84E55B751CEDDA8C004E8962 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +524,7 @@
 				84E55BA21CEDDA8C004E8962 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84E55BA31CEDDA8C004E8962 /* Build configuration list for PBXNativeTarget "SnapItTests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +533,7 @@
 				84E55BA51CEDDA8C004E8962 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		84E55BA61CEDDA8C004E8962 /* Build configuration list for PBXNativeTarget "SnapItUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +542,7 @@
 				84E55BA81CEDDA8C004E8962 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
