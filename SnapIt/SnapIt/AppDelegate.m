@@ -111,11 +111,79 @@
     
     return fetchedRecords;
 }
--(NSArray*)getPlacesMarkedByUser:(User*) user
+-(NSArray*)getPlacesMarkedByUser
 {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", user]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", currentUser]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedRecords;
+}
+-(double) getAveregeRatingByUserPlace: (Place* ) place
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:@"Rating"
+                                 inManagedObjectContext:self.managedObjectContext];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"(place = %@ && user == %@)", place,  currentUser]];
+    request.resultType = NSDictionaryResultType;
+    NSExpressionDescription* averageExpressionDescription =
+    [[NSExpressionDescription alloc] init];
+    [averageExpressionDescription setName:@"averageRating"];
+    [averageExpressionDescription
+     setExpression:[NSExpression expressionForFunction:@"average:"
+                                             arguments:[NSArray arrayWithObject:
+                                                        [NSExpression expressionForKeyPath:@"Rating"]]]];
+    [averageExpressionDescription setExpressionResultType:NSFloatAttributeType];
+    request.propertiesToFetch = [NSArray arrayWithObject:averageExpressionDescription] ;
+    NSArray* results = [self.managedObjectContext executeFetchRequest:request error:nil];
+    NSDictionary* fetchResultsDictionary = [results objectAtIndex:0];
+    return [[fetchResultsDictionary
+                            objectForKey:@"averageRating"] floatValue];
+}
+-(NSArray*)getPlacesMarkedByUserSortByRating
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", currentUser]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    NSArray *sortedRecords;
+    
+    sortedRecords = [[NSMutableArray arrayWithArray:fetchedRecords]  sortedArrayUsingComparator: ^(id obj1, id obj2)
+    {
+        double mark1 = [self getAveregeRatingByUserPlace:obj1];
+        double mark2 = [self getAveregeRatingByUserPlace:obj2];
+        if (mark1> mark2)
+        {
+            
+            return (NSComparisonResult)NSOrderedAscending;
+        }
+        
+        if (mark1 < mark2)
+        {
+            
+            return (NSComparisonResult)NSOrderedDescending;
+        }
+        
+        return (NSComparisonResult)NSOrderedSame;
+    }];
+    
+    return sortedRecords;
+}
+//not ready
+-(NSArray*)getPlacesMarkedByUserSortByDistance
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", currentUser]];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     NSError* error;
