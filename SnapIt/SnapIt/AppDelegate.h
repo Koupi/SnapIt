@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
+#import "Place.h"
+#import "User.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -22,7 +23,12 @@
 
 -(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: (NSString*) email andFbPassword:(NSString*)fbpassword;
 -(BOOL)getUserByLogin:(NSString*) login andPassword: (NSString*) password;
-
+-(void) addPlaceByLocation: (NSString*) location andLatitude: (int) latitude andLongitude:(int) longitude;
+-(void) addPhoto: (NSData*) photo ByPlace: (Place*) place;
+-(void) addRating: (int) rating ByPlace: (Place*) place andUser:(User*) user;
+-(NSArray*)getAllPlaces;
+-(NSArray*)getPlacesMarkedByUser:(User*) user;
+-(NSArray*)getPlacesMarkedByUserSortByRating;
 
 @end
 
