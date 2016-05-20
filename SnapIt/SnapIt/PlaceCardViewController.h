@@ -1,5 +1,5 @@
 //
-//  PlaceListViewController.h
+//  PlaceCardViewController.h
 //  SnapIt
 //
 //  Created by Admin on 20.05.16.
@@ -10,6 +10,6 @@
 #import "AppDelegate.h"
 #import "Place.h"
 
-@interface PlaceListViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface PlaceCardViewController : UIViewController
 
 @end

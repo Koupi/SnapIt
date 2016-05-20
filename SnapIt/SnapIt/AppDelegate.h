@@ -21,9 +21,12 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+-(void) setCurrentPlace:(Place *)place;
+-(Place *) getCurrentPlace;
 -(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: (NSString*) email andFbPassword:(NSString*)fbpassword;
 -(BOOL)getUserByLogin:(NSString*) login andPassword: (NSString*) password;
--(void) addPlaceByLocation: (NSString*) location andLatitude: (int) latitude andLongitude:(int) longitude;
+-(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude;
+-(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude andName:(NSString *)name;
 -(void) addPhoto: (NSData*) photo ByPlace: (Place*) place;
 -(void) addRating: (int) rating ByPlace: (Place*) place andUser:(User*) user;
 -(NSArray*)getAllPlaces;

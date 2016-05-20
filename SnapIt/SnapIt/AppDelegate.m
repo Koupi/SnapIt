@@ -13,11 +13,21 @@
 #import "Picture.h"
 @interface AppDelegate () {
     User *currentUser;
+    Place *currentPlace;
 }
 
 @end
 
 @implementation AppDelegate
+
+-(void) setCurrentPlace:(Place *)place
+{
+    currentPlace = place;
+}
+-(Place *) getCurrentPlace
+{
+    return currentPlace;
+}
 
 //get user
 -(BOOL)getUserByLogin:(NSString*) login andPassword: (NSString*) password
@@ -63,12 +73,21 @@
     [self saveContext];
     return true;
 }
-
--(void) addPlaceByLocation: (NSString*) location andLatitude: (int) latitude andLongitude:(int) longitude
+-(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude andName:(NSString *)name
 {
     Place * newPlace = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
-    newPlace.latitude = [NSNumber numberWithInt: latitude];
-    newPlace.longitude = [NSNumber numberWithInt: longitude];
+    newPlace.latitude = [NSNumber numberWithDouble: latitude];
+    newPlace.longitude = [NSNumber numberWithDouble: longitude];
+    newPlace.location = location;
+    newPlace.name = name;
+    [self saveContext];
+    
+}
+-(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude
+{
+    Place * newPlace = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    newPlace.latitude = [NSNumber numberWithDouble: latitude];
+    newPlace.longitude = [NSNumber numberWithDouble: longitude];
     newPlace.location = location;
     [self saveContext];
     
@@ -200,6 +219,8 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self addUserByLogin:@"login" andPassword:@"password" andEmail:@"maria-cco@mail.ru" andFbPassword:@""];
+        [self addPlaceByLocation:@"Minsk" andLatitude:53.908572 andLongitude:27.574929 andName:@"The Victory Square"];
+        [self addPlaceByLocation:@"Minsk" andLatitude:53.895157 andLongitude:27.545816 andName:@"The Independence Square"];
     }
     
     return YES;

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8446FA021CEF9E3300198096 /* MyMarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446FA011CEF9E3300198096 /* MyMarksViewController.m */; };
+		8446FA051CEFA28800198096 /* PlaceCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446FA041CEFA28800198096 /* PlaceCardViewController.m */; };
 		84595F661CEF313B003E9DAF /* PlaceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84595F651CEF313B003E9DAF /* PlaceListViewController.m */; };
 		845964C01CEF0F570070DC72 /* MenuRealizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845964BF1CEF0F570070DC72 /* MenuRealizationViewController.m */; };
 		84A515D31CEEF212008C6743 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A515D21CEEF212008C6743 /* MenuViewController.m */; };
@@ -44,6 +46,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8446FA001CEF9E3300198096 /* MyMarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMarksViewController.h; sourceTree = "<group>"; };
+		8446FA011CEF9E3300198096 /* MyMarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMarksViewController.m; sourceTree = "<group>"; };
+		8446FA031CEFA28800198096 /* PlaceCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceCardViewController.h; sourceTree = "<group>"; };
+		8446FA041CEFA28800198096 /* PlaceCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceCardViewController.m; sourceTree = "<group>"; };
 		84595F641CEF313B003E9DAF /* PlaceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceListViewController.h; sourceTree = "<group>"; };
 		84595F651CEF313B003E9DAF /* PlaceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceListViewController.m; sourceTree = "<group>"; };
 		845964BE1CEF0F570070DC72 /* MenuRealizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRealizationViewController.h; sourceTree = "<group>"; };
@@ -134,8 +140,12 @@
 				84E55B791CEDDA8C004E8962 /* LoginViewController.h */,
 				84E55B7A1CEDDA8C004E8962 /* LoginViewController.m */,
 				84E55B7C1CEDDA8C004E8962 /* Main.storyboard */,
+				8446FA031CEFA28800198096 /* PlaceCardViewController.h */,
+				8446FA041CEFA28800198096 /* PlaceCardViewController.m */,
 				84595F641CEF313B003E9DAF /* PlaceListViewController.h */,
 				84595F651CEF313B003E9DAF /* PlaceListViewController.m */,
+				8446FA001CEF9E3300198096 /* MyMarksViewController.h */,
+				8446FA011CEF9E3300198096 /* MyMarksViewController.m */,
 				845964BE1CEF0F570070DC72 /* MenuRealizationViewController.h */,
 				845964BF1CEF0F570070DC72 /* MenuRealizationViewController.m */,
 				84A515D11CEEF212008C6743 /* MenuViewController.h */,
@@ -313,10 +323,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8446FA051CEFA28800198096 /* PlaceCardViewController.m in Sources */,
 				845964C01CEF0F570070DC72 /* MenuRealizationViewController.m in Sources */,
 				84A515D31CEEF212008C6743 /* MenuViewController.m in Sources */,
 				D0CE07A91CEDE1B000ECEC78 /* Picture.m in Sources */,
 				D0CE07A01CEDE1B000ECEC78 /* Place.m in Sources */,
+				8446FA021CEF9E3300198096 /* MyMarksViewController.m in Sources */,
 				84E55B7B1CEDDA8C004E8962 /* LoginViewController.m in Sources */,
 				84A515D61CEEF5EA008C6743 /* RegistrateViewController.m in Sources */,
 				D0CE07A31CEDE1B000ECEC78 /* User.m in Sources */,

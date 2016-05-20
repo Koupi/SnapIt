@@ -1,14 +1,14 @@
 //
-//  PlaceListViewController.m
+//  MyMarksViewController.m
 //  SnapIt
 //
 //  Created by Admin on 20.05.16.
 //  Copyright © 2016 Alex Zhidkov. All rights reserved.
 //
 
-#import "PlaceListViewController.h"
+#import "MyMarksViewController.h"
 
-@interface PlaceListViewController () {
+@interface MyMarksViewController () {
     NSArray *places;
     AppDelegate *app;
 }
@@ -16,17 +16,17 @@
 
 @end
 
-@implementation PlaceListViewController
+@implementation MyMarksViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    places = [app getAllPlaces];
-    [self sortResultByDistance];
+    places = [app getPlacesMarkedByUserSortByRating];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 - (IBAction)sortValueChanged:(UISegmentedControl *)sender {
     if ([sender selectedSegmentIndex] == 0) {
@@ -53,13 +53,13 @@
 - (void)sortResultByDistance {
     places = [places sortedArrayUsingComparator:^NSComparisonResult(id ob1, id ob2) {
         /*double r1 = [((Place *)ob1).rating doubleValue];
-        double r2 = [((Place *)ob2).rating doubleValue];
-        if(r1 > r2) {
-            return NSOrderedAscending;
-        }
-        if(r1 < r2) {
-            return NSOrderedDescending;
-        }*/
+         double r2 = [((Place *)ob2).rating doubleValue];
+         if(r1 > r2) {
+         return NSOrderedAscending;
+         }
+         if(r1 < r2) {
+         return NSOrderedDescending;
+         }*/
         return NSOrderedAscending;
     }];
     [_tableResult reloadData];
@@ -79,7 +79,7 @@
                                       reuseIdentifier:CellIdentifier];
     }
     Place *place = (Place *)[places objectAtIndex:indexPath.row];
-
+    
     cell.textLabel.text = [NSString stringWithFormat:@"%@, rating:%@", place.name, place.rating];
     return cell;
 }
@@ -91,7 +91,7 @@
     [self searchForPlaceWithName:[searchBar text]];
 }
 - (void)searchForPlaceWithName:(NSString *)name {
-    places = [app getAllPlaces];
+    places = [app getPlacesMarkedByUserSortByRating];
     NSMutableArray *buf = [[NSMutableArray alloc] init];
     for(id ob in places) {
         Place *place = (Place *)ob;
@@ -105,8 +105,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath) {
-        [app setCurrentPlace:places[indexPath.row]];
-        [self performSegueWithIdentifier:@"listToCard" sender:self];
+        //[app setSelectedBook:booksResult[indexPath.row]];
     }
 }
 

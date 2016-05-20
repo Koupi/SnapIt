@@ -54,7 +54,7 @@
             </objects>
             <point key="canvasLocation" x="135" y="273"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Menu-->
         <scene sceneID="eIs-80-8jD">
             <objects>
                 <tableViewController id="iT3-tj-2ob" customClass="MenuRealizationViewController" sceneMemberID="viewController">
@@ -74,7 +74,7 @@
                                             <rect key="frame" x="139" y="11" width="42" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -94,7 +94,7 @@
                                             <rect key="frame" x="123" y="11" width="75" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -110,11 +110,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My mark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fhM-9V-LDE">
-                                            <rect key="frame" x="124" y="11" width="72" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My marks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fhM-9V-LDE">
+                                            <rect key="frame" x="122" y="11" width="77" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -129,7 +129,7 @@
                             <outlet property="delegate" destination="iT3-tj-2ob" id="qEW-Sa-GZe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Ub2-nS-Dss"/>
+                    <navigationItem key="navigationItem" title="Menu" id="Ub2-nS-Dss"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Wr-gw-NFc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -147,7 +147,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Map" id="grn-0d-HLN"/>
+                                    <navigationItem title="Map" id="grn-0d-HLN">
+                                        <barButtonItem key="leftBarButtonItem" title=" " style="plain" id="nsE-Q4-N3s">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Wbi-mW-5Lk">
+                                                <rect key="frame" x="16" y="7" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Menu"/>
+                                                <connections>
+                                                    <segue destination="MJd-5m-xpR" kind="modal" id="60H-aW-7N5"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" placeholder="Search a place" id="cfF-GN-9jA">
@@ -184,12 +195,10 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="kPu-7H-UDK" id="q19-ns-rJX"/>
+                                </connections>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="JQ7-T8-LuP">
-                                <rect key="frame" x="0.0" y="128" width="320" height="440"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="po2-rr-o4Z">
                                 <rect key="frame" x="43" y="92" width="234" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -197,32 +206,129 @@
                                     <segment title="Sort by distance"/>
                                     <segment title="Sort by rating"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortValueChanged:" destination="kPu-7H-UDK" eventType="valueChanged" id="V3V-73-peJ"/>
+                                </connections>
                             </segmentedControl>
                             <navigationBar contentMode="scaleToFill" id="T1r-KU-qiq">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="Place list" id="x6Q-ds-yk0">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="3IO-ov-IEI">
-                                            <connections>
-                                                <segue destination="iT3-tj-2ob" kind="modal" id="iKb-VK-NME"/>
-                                            </connections>
+                                    <navigationItem title="Place list" id="Qq1-cj-Diq">
+                                        <barButtonItem key="backBarButtonItem" title="Menu" width="40" id="azw-8J-8RO"/>
+                                        <barButtonItem key="leftBarButtonItem" title=" " style="plain" id="4zJ-nC-e8n">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wvI-VK-Esg">
+                                                <rect key="frame" x="16" y="7" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title=" Menu"/>
+                                                <connections>
+                                                    <segue destination="MJd-5m-xpR" kind="modal" id="D3t-9k-Hfh"/>
+                                                </connections>
+                                            </button>
                                         </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="JQ7-T8-LuP">
+                                <rect key="frame" x="0.0" y="128" width="320" height="440"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="kPu-7H-UDK" id="F4t-1V-WQk"/>
+                                    <outlet property="delegate" destination="kPu-7H-UDK" id="6af-Pg-ceK"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tableResult" destination="JQ7-T8-LuP" id="8ls-J3-x5y"/>
+                        <segue destination="3Qg-BD-xgt" kind="modal" identifier="listToCard" id="ugV-hf-7jH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e1J-iv-ozH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1557" y="-118"/>
         </scene>
-        <!--View Controller-->
+        <!--Place Card View Controller-->
+        <scene sceneID="5Uv-Pq-s3D">
+            <objects>
+                <viewController id="3Qg-BD-xgt" customClass="PlaceCardViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R3d-ND-XY5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uzT-bX-7Id">
+                                <rect key="frame" x="69" y="201" width="166" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Coords" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="B1B-w7-MGW">
+                                <rect key="frame" x="69" y="254" width="166" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IE4-iP-cde">
+                                <rect key="frame" x="69" y="301" width="85" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uLQ-uO-IKn">
+                                <rect key="frame" x="170" y="301" width="65" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <navigationBar contentMode="scaleToFill" id="xrs-OJ-pz0">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Place card" id="yt8-kq-3G6">
+                                        <barButtonItem key="leftBarButtonItem" title=" " style="plain" id="dCn-mE-PiO">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4tx-zX-ehC">
+                                                <rect key="frame" x="16" y="7" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Back"/>
+                                                <connections>
+                                                    <segue destination="kPu-7H-UDK" kind="modal" id="Wfa-hn-2Hx"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0ht-Xa-K5M">
+                                <rect key="frame" x="69" y="146" width="194" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="lblCoords" destination="B1B-w7-MGW" id="rhU-25-EaK"/>
+                        <outlet property="lblLocation" destination="uzT-bX-7Id" id="V6C-uX-5KY"/>
+                        <outlet property="lblName" destination="0ht-Xa-K5M" id="2v3-66-O1k"/>
+                        <outlet property="lblRating" destination="uLQ-uO-IKn" id="zcG-0u-Qmi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VJa-76-MoG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2035" y="-118"/>
+        </scene>
+        <!--My Marks View Controller-->
         <scene sceneID="K6K-g2-dLn">
             <objects>
-                <viewController id="G0D-qc-Rc3" sceneMemberID="viewController">
+                <viewController id="G0D-qc-Rc3" customClass="MyMarksViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TvZ-UH-B5G">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -231,13 +337,27 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="My marks" id="9Bc-pH-3E0"/>
+                                    <navigationItem title="My marks" id="9Bc-pH-3E0">
+                                        <barButtonItem key="leftBarButtonItem" title=" " style="plain" id="M5d-hx-Gaw">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jZ1-W5-bLF">
+                                                <rect key="frame" x="16" y="7" width="71" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <state key="normal" title="Menu"/>
+                                                <connections>
+                                                    <segue destination="MJd-5m-xpR" kind="modal" id="yGb-L3-7rS"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
                             <searchBar contentMode="redraw" placeholder="Search a place" id="cPv-4y-YeV">
                                 <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="G0D-qc-Rc3" id="Unq-Pq-Zdc"/>
+                                </connections>
                             </searchBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="uYq-N7-3qL">
                                 <rect key="frame" x="54" y="93" width="213" height="29"/>
@@ -246,15 +366,25 @@
                                     <segment title="Sort by distance"/>
                                     <segment title="Sort by mark"/>
                                 </segments>
+                                <connections>
+                                    <action selector="sortValueChanged:" destination="G0D-qc-Rc3" eventType="valueChanged" id="iHA-gj-lhT"/>
+                                </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="XxL-is-lLq">
                                 <rect key="frame" x="0.0" y="129" width="320" height="439"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="G0D-qc-Rc3" id="B5Z-N2-NKd"/>
+                                    <outlet property="delegate" destination="G0D-qc-Rc3" id="PLF-yx-Z7w"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="tableResult" destination="XxL-is-lLq" id="ps9-ts-A2D"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lin-nM-FH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -341,7 +471,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="iKb-VK-NME"/>
-        <segue reference="68y-dI-Ts5"/>
+        <segue reference="D3t-9k-Hfh"/>
+        <segue reference="Wfa-hn-2Hx"/>
     </inferredMetricsTieBreakers>
 </document>
