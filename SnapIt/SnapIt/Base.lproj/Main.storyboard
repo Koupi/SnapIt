@@ -79,6 +79,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="4P9-ny-bTp" kind="modal" id="Aoh-ox-bHv"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="list" id="o1q-16-O3M">
                                 <rect key="frame" x="0.0" y="136" width="320" height="44"/>
@@ -96,6 +99,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="kPu-7H-UDK" kind="modal" id="LrS-nL-BKO"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="marks" id="CaD-QE-dxD">
                                 <rect key="frame" x="0.0" y="180" width="320" height="44"/>
@@ -113,6 +119,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="G0D-qc-Rc3" kind="modal" id="cI4-ea-6Nz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -146,10 +155,6 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="tor-q9-KZ3">
-                                <rect key="frame" x="9" y="96" width="302" height="394"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Xxu-Cx-CC9">
                                 <rect key="frame" x="9" y="520" width="302" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -167,21 +172,14 @@
             </objects>
             <point key="canvasLocation" x="1557" y="-741"/>
         </scene>
-        <!--View Controller-->
+        <!--Place List View Controller-->
         <scene sceneID="Tes-kb-0l6">
             <objects>
-                <viewController id="kPu-7H-UDK" sceneMemberID="viewController">
+                <viewController id="kPu-7H-UDK" customClass="PlaceListViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hus-R3-LTb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" id="T1r-KU-qiq">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Place list" id="x6Q-ds-yk0"/>
-                                </items>
-                            </navigationBar>
                             <searchBar contentMode="redraw" placeholder="Search a place" id="tcz-RN-lx6">
                                 <rect key="frame" x="0.0" y="44" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -200,6 +198,19 @@
                                     <segment title="Sort by rating"/>
                                 </segments>
                             </segmentedControl>
+                            <navigationBar contentMode="scaleToFill" id="T1r-KU-qiq">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Place list" id="x6Q-ds-yk0">
+                                        <barButtonItem key="backBarButtonItem" title="Back" id="3IO-ov-IEI">
+                                            <connections>
+                                                <segue destination="iT3-tj-2ob" kind="modal" id="iKb-VK-NME"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -247,7 +258,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lin-nM-FH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1557" y="516"/>
+            <point key="canvasLocation" x="1557" y="610"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="vek-gE-FI5">
@@ -330,6 +341,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="iKb-VK-NME"/>
         <segue reference="68y-dI-Ts5"/>
     </inferredMetricsTieBreakers>
 </document>

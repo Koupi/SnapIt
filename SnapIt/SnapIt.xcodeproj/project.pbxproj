@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84595F661CEF313B003E9DAF /* PlaceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84595F651CEF313B003E9DAF /* PlaceListViewController.m */; };
 		845964C01CEF0F570070DC72 /* MenuRealizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 845964BF1CEF0F570070DC72 /* MenuRealizationViewController.m */; };
 		84A515D31CEEF212008C6743 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A515D21CEEF212008C6743 /* MenuViewController.m */; };
 		84A515D61CEEF5EA008C6743 /* RegistrateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A515D51CEEF5EA008C6743 /* RegistrateViewController.m */; };
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84595F641CEF313B003E9DAF /* PlaceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceListViewController.h; sourceTree = "<group>"; };
+		84595F651CEF313B003E9DAF /* PlaceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceListViewController.m; sourceTree = "<group>"; };
 		845964BE1CEF0F570070DC72 /* MenuRealizationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuRealizationViewController.h; sourceTree = "<group>"; };
 		845964BF1CEF0F570070DC72 /* MenuRealizationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuRealizationViewController.m; sourceTree = "<group>"; };
 		84A515D11CEEF212008C6743 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				84E55B791CEDDA8C004E8962 /* LoginViewController.h */,
 				84E55B7A1CEDDA8C004E8962 /* LoginViewController.m */,
 				84E55B7C1CEDDA8C004E8962 /* Main.storyboard */,
+				84595F641CEF313B003E9DAF /* PlaceListViewController.h */,
+				84595F651CEF313B003E9DAF /* PlaceListViewController.m */,
 				845964BE1CEF0F570070DC72 /* MenuRealizationViewController.h */,
 				845964BF1CEF0F570070DC72 /* MenuRealizationViewController.m */,
 				84A515D11CEEF212008C6743 /* MenuViewController.h */,
@@ -316,6 +321,7 @@
 				84A515D61CEEF5EA008C6743 /* RegistrateViewController.m in Sources */,
 				D0CE07A31CEDE1B000ECEC78 /* User.m in Sources */,
 				84E55B781CEDDA8C004E8962 /* AppDelegate.m in Sources */,
+				84595F661CEF313B003E9DAF /* PlaceListViewController.m in Sources */,
 				84E55B811CEDDA8C004E8962 /* SnapIt.xcdatamodeld in Sources */,
 				D0CE07A61CEDE1B000ECEC78 /* Rating.m in Sources */,
 				84E55B751CEDDA8C004E8962 /* main.m in Sources */,
