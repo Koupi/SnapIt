@@ -20,6 +20,9 @@
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
+-(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: (NSString*) email andFbPassword:(NSString*)fbpassword;
+-(BOOL)getUserByLogin:(NSString*) login andPassword: (NSString*) password;
+
 
 @end
 

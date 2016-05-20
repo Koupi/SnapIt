@@ -2,14 +2,12 @@
 //  ViewController.h
 //  SnapIt
 //
-//  Created by Admin on 19.05.16.
+//  Created by Admin on 20.05.16.
 //  Copyright © 2016 Alex Zhidkov. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface MenuViewController : UINavigationController
 
 @end
-

@@ -10,14 +10,17 @@
 #import "User.h"
 #import "Place.h"
 #import "Rating.h"
-@interface AppDelegate ()
+#import "Picture.h"
+@interface AppDelegate () {
+    User *currentUser;
+}
 
 @end
 
 @implementation AppDelegate
 
 //get user
--(NSArray*)getUserByLogin:(NSString*) login andPassword: (NSString*) password
+-(BOOL)getUserByLogin:(NSString*) login andPassword: (NSString*) password
 {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -28,17 +31,18 @@
     NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if([fetchedRecords count] == 0)
     {
-        return nil;
+        return NO;
     }
     else
     {
-        return fetchedRecords[0];
+        currentUser = fetchedRecords[0];
+        return YES;
     }
     
 }
 
 //add user or false if noy unique
--(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: email
+-(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: (NSString*) email andFbPassword:(NSString*)fbpassword
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(login == %@)", login]];
@@ -55,6 +59,7 @@
     newUser.login = login;
     newUser.password = password;
     newUser.email = email;
+    newUser.fbpassword = fbpassword;
     [self saveContext];
     return true;
 }
@@ -122,7 +127,13 @@
 
 //
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self addUserByLogin:@"login" andPassword:@"password" andEmail:@"maria-cco@mail.ru" andFbPassword:@""];
+    }
+    
     return YES;
 }
 
