@@ -135,10 +135,10 @@
             </objects>
             <point key="canvasLocation" x="1079" y="-118"/>
         </scene>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="SCu-Xw-0f8">
             <objects>
-                <viewController id="4P9-ny-bTp" sceneMemberID="viewController">
+                <viewController id="4P9-ny-bTp" customClass="MapViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o98-zm-Xkz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,9 +175,16 @@
                                     <segment title="Nearest"/>
                                 </segments>
                             </segmentedControl>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="K4Q-3v-WZ6">
+                                <rect key="frame" x="9" y="88" width="302" height="432"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="map" destination="K4Q-3v-WZ6" id="gbs-4z-8rd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gf-Nq-AI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -471,7 +478,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="D3t-9k-Hfh"/>
-        <segue reference="Wfa-hn-2Hx"/>
+        <segue reference="LrS-nL-BKO"/>
+        <segue reference="60H-aW-7N5"/>
     </inferredMetricsTieBreakers>
 </document>

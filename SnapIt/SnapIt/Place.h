@@ -2,35 +2,23 @@
 //  Place.h
 //  SnapIt
 //
-//  Created by fpmi on 19.05.16.
-//  Copyright (c) 2016 Alex Zhidkov. All rights reserved.
+//  Created by Admin on 21.05.16.
+//  Copyright © 2016 Alex Zhidkov. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Picture, Rating;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface Place : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * location;
-@property (nonatomic, retain) NSNumber * rating;
-@property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSNumber * latitude;
-@property (nonatomic, retain) NSSet *pictures;
-@property (nonatomic, retain) NSSet *ratings;
-@end
-
-@interface Place (CoreDataGeneratedAccessors)
-
-- (void)addPicturesObject:(NSManagedObject *)value;
-- (void)removePicturesObject:(NSManagedObject *)value;
-- (void)addPictures:(NSSet *)values;
-- (void)removePictures:(NSSet *)values;
-
-- (void)addRatingsObject:(NSManagedObject *)value;
-- (void)removeRatingsObject:(NSManagedObject *)value;
-- (void)addRatings:(NSSet *)values;
-- (void)removeRatings:(NSSet *)values;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Place+CoreDataProperties.h"

@@ -2,21 +2,16 @@
 //  Place.m
 //  SnapIt
 //
-//  Created by fpmi on 19.05.16.
-//  Copyright (c) 2016 Alex Zhidkov. All rights reserved.
+//  Created by Admin on 21.05.16.
+//  Copyright © 2016 Alex Zhidkov. All rights reserved.
 //
 
 #import "Place.h"
-
+#import "Picture.h"
+#import "Rating.h"
 
 @implementation Place
 
-@dynamic name;
-@dynamic location;
-@dynamic rating;
-@dynamic longitude;
-@dynamic latitude;
-@dynamic pictures;
-@dynamic ratings;
+// Insert code here to add functionality to your managed object subclass
 
 @end
