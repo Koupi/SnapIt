@@ -11,6 +11,8 @@
 #import "Place.h"
 #import "Rating.h"
 #import "Picture.h"
+#import "SortingSupport.h"
+#import "LocationInfoProvider.h"
 @interface AppDelegate () {
     User *currentUser;
     Place *currentPlace;
@@ -117,7 +119,7 @@
     [newRating setValue: place forKey:@"place"];
     [newRating setValue: user forKey:@"user"];
     
-    [self saveContext];	
+    [self saveContext];
 }
 -(NSArray*)getAllPlaces
 {
@@ -130,6 +132,20 @@
     
     return fetchedRecords;
 }
+-(NSArray*) getPlaceByName: (NSString*) name
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(name like[cd] %@)", name]];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedRecords;
+    
+}
+//места оцененные пользователем для карты
 -(NSArray*)getPlacesMarkedByUser
 {
     
@@ -142,12 +158,14 @@
     
     return fetchedRecords;
 }
--(double) getAveregeRatingByUserPlace: (Place* ) place
+//средний рейтинг места по всем оценкам
+-(double) getAveregeRatingByPlace: (Place* ) place
 {
+    //вывести весь fetchRequest. Что выдаёт?
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     request.entity = [NSEntityDescription entityForName:@"Rating"
                                  inManagedObjectContext:self.managedObjectContext];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"(place = %@ && user == %@)", place,  currentUser]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"(place == %@)", place]];
     request.resultType = NSDictionaryResultType;
     NSExpressionDescription* averageExpressionDescription =
     [[NSExpressionDescription alloc] init];
@@ -161,56 +179,60 @@
     NSArray* results = [self.managedObjectContext executeFetchRequest:request error:nil];
     NSDictionary* fetchResultsDictionary = [results objectAtIndex:0];
     return [[fetchResultsDictionary
-                            objectForKey:@"averageRating"] floatValue];
+             objectForKey:@"averageRating"] floatValue];
+}
+//рейтинг конкретного места от текущего пользователя
+-(int)getRatingByUserOfPlace:(Place* ) place
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    request.entity = [NSEntityDescription entityForName:@"Rating"
+                                 inManagedObjectContext:self.managedObjectContext];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"(place == %@ && user==%@)", place, currentUser]];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:request error:&error];
+    if(fetchedRecords.count==0)
+        return -1;
+    else
+    {
+        Rating* rating =  fetchedRecords[0];
+        return  rating.rating.intValue;
+    }
+}
+//экран plase List sort by distance
+-(NSArray*)getPlacesSortByAveregeRating
+{
+    NSArray *fetchedRecords = [self getAllPlaces];
+    return [SortingSupport sortPlacesByAveregeRating:fetchedRecords];
 }
 -(NSArray*)getPlacesMarkedByUserSortByRating
 {
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", currentUser]];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSError* error;
-
-    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    NSArray *sortedRecords;
-    
-    sortedRecords = [[NSMutableArray arrayWithArray:fetchedRecords]  sortedArrayUsingComparator: ^(id obj1, id obj2)
-    {
-        double mark1 = [self getAveregeRatingByUserPlace:obj1];
-        double mark2 = [self getAveregeRatingByUserPlace:obj2];
-        if (mark1> mark2)
-        {
-            
-            return (NSComparisonResult)NSOrderedAscending;
-        }
-        
-        if (mark1 < mark2)
-        {
-            
-            return (NSComparisonResult)NSOrderedDescending;
-        }
-        
-        return (NSComparisonResult)NSOrderedSame;
-    }];
-    
-    return sortedRecords;
+    NSArray *fetchedRecords = [self getPlacesMarkedByUser];
+    return [SortingSupport sortPlacesByRatingMarkedByUser:fetchedRecords];
 }
-//not ready
+-(NSArray*)getPlacesSortByDistance
+{
+    NSArray *fetchedRecords = [self getAllPlaces];
+    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
+    double latitude = location.getLatitude;
+    double longitude = location.getLongitude;
+    return [SortingSupport sortPlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude];
+}
 -(NSArray*)getPlacesMarkedByUserSortByDistance
 {
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(ANY ratings.user == %@)", currentUser]];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    NSError* error;
-    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    return fetchedRecords;
+    NSArray *fetchedRecords = [self getPlacesMarkedByUser];
+    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
+    double latitude = location.getLatitude;
+    double longitude = location.getLongitude;
+    return [SortingSupport sortPlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude];
 }
-
+-(NSArray*)getNearestPlacesByRadius: (double) radius
+{
+    NSArray *fetchedRecords = [self getPlacesMarkedByUser];
+    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
+    double latitude = location.getLatitude;
+    double longitude = location.getLongitude;
+    return [SortingSupport choosePlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude andRadius: radius];
+}
 
 //
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
