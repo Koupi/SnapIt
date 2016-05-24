@@ -10,6 +10,6 @@
 #import "AppDelegate.h"
 #import "Place.h"
 
-@interface PlaceCardViewController : UIViewController
+@interface PlaceCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @end

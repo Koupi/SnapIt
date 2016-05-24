@@ -11,6 +11,7 @@
 @interface MyMarksViewController () {
     NSArray *places;
     AppDelegate *app;
+    LocationInfoProvider *loc;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableResult;
 
@@ -21,7 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    places = [app getPlacesMarkedByUserSortByRating];
+    loc = [[LocationInfoProvider alloc] init];
+    places = [app getPlacesMarkedByUser];
+    [SortingSupport sortPlacesByDistance:places byLatitude:[loc getLatitude] andLongitude:[loc getLongitude]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,38 +33,10 @@
 }
 - (IBAction)sortValueChanged:(UISegmentedControl *)sender {
     if ([sender selectedSegmentIndex] == 0) {
-        [self sortResultByDistance];
+        [SortingSupport sortPlacesByDistance:places byLatitude:[loc getLatitude] andLongitude:[loc getLongitude]];
     } else {
-        [self sortResultByRating];
+        [SortingSupport sortPlacesByRatingMarkedByUser:places];
     }
-}
-
-- (void)sortResultByRating {
-    places = [places sortedArrayUsingComparator:^NSComparisonResult(id ob1, id ob2) {
-        double r1 = [((Place *)ob1).rating doubleValue];
-        double r2 = [((Place *)ob2).rating doubleValue];
-        if(r1 > r2) {
-            return NSOrderedAscending;
-        }
-        if(r1 < r2) {
-            return NSOrderedDescending;
-        }
-        return NSOrderedSame;
-    }];
-    [_tableResult reloadData];
-}
-- (void)sortResultByDistance {
-    places = [places sortedArrayUsingComparator:^NSComparisonResult(id ob1, id ob2) {
-        /*double r1 = [((Place *)ob1).rating doubleValue];
-         double r2 = [((Place *)ob2).rating doubleValue];
-         if(r1 > r2) {
-         return NSOrderedAscending;
-         }
-         if(r1 < r2) {
-         return NSOrderedDescending;
-         }*/
-        return NSOrderedAscending;
-    }];
     [_tableResult reloadData];
 }
 
@@ -81,6 +56,9 @@
     Place *place = (Place *)[places objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@, rating:%@", place.name, place.rating];
+    if([place.pictures count] > 0) {
+        //cell.imageView.image = [place.pictures anyObject];
+    }
     return cell;
 }
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
@@ -91,7 +69,13 @@
     [self searchForPlaceWithName:[searchBar text]];
 }
 - (void)searchForPlaceWithName:(NSString *)name {
-    places = [app getPlacesMarkedByUserSortByRating];
+    if([name length] <= 0) {
+        places = [app getPlacesMarkedByUser];
+        [SortingSupport sortPlacesByDistance:places byLatitude:[loc getLatitude] andLongitude:[loc getLongitude]];
+        [_tableResult reloadData];
+        return;
+    }
+    places = [app getPlacesMarkedByUser];
     NSMutableArray *buf = [[NSMutableArray alloc] init];
     for(id ob in places) {
         Place *place = (Place *)ob;
