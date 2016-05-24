@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		84340DD11CF0487000FF6354 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84340DD01CF0487000FF6354 /* CoreLocation.framework */; };
-		84340DD61CF04E3900FF6354 /* Place+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 84340DD31CF04E3900FF6354 /* Place+CoreDataProperties.m */; };
-		84340DD71CF04E3900FF6354 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 84340DD51CF04E3900FF6354 /* Place.m */; };
 		8446FA021CEF9E3300198096 /* MyMarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446FA011CEF9E3300198096 /* MyMarksViewController.m */; };
 		8446FA051CEFA28800198096 /* PlaceCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446FA041CEFA28800198096 /* PlaceCardViewController.m */; };
 		844B06571CEFB875007D1004 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844B06561CEFB875007D1004 /* MapKit.framework */; };
@@ -27,6 +25,10 @@
 		84E55B861CEDDA8C004E8962 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E55B841CEDDA8C004E8962 /* LaunchScreen.storyboard */; };
 		84E55B911CEDDA8C004E8962 /* SnapItTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E55B901CEDDA8C004E8962 /* SnapItTests.m */; };
 		84E55B9C1CEDDA8C004E8962 /* SnapItUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E55B9B1CEDDA8C004E8962 /* SnapItUITests.m */; };
+		D0414F621CF48454001FF63E /* PostingSampleController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0414F611CF48454001FF63E /* PostingSampleController.m */; };
+		D0C9FF5F1CF4772500067DD3 /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C9FF5E1CF4772500067DD3 /* Place.m */; };
+		D0C9FF621CF477A600067DD3 /* SortingSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C9FF611CF477A600067DD3 /* SortingSupport.m */; };
+		D0C9FF651CF4782500067DD3 /* LocationInfoProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C9FF641CF4782500067DD3 /* LocationInfoProvider.m */; };
 		D0CE07A31CEDE1B000ECEC78 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE07A21CEDE1B000ECEC78 /* User.m */; };
 		D0CE07A61CEDE1B000ECEC78 /* Rating.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE07A51CEDE1B000ECEC78 /* Rating.m */; };
 		D0CE07A91CEDE1B000ECEC78 /* Picture.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CE07A81CEDE1B000ECEC78 /* Picture.m */; };
@@ -51,10 +53,6 @@
 
 /* Begin PBXFileReference section */
 		84340DD01CF0487000FF6354 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		84340DD21CF04E3900FF6354 /* Place+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Place+CoreDataProperties.h"; sourceTree = "<group>"; };
-		84340DD31CF04E3900FF6354 /* Place+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Place+CoreDataProperties.m"; sourceTree = "<group>"; };
-		84340DD41CF04E3900FF6354 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
-		84340DD51CF04E3900FF6354 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		8446FA001CEF9E3300198096 /* MyMarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMarksViewController.h; sourceTree = "<group>"; };
 		8446FA011CEF9E3300198096 /* MyMarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMarksViewController.m; sourceTree = "<group>"; };
 		8446FA031CEFA28800198096 /* PlaceCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceCardViewController.h; sourceTree = "<group>"; };
@@ -87,6 +85,14 @@
 		84E55B971CEDDA8C004E8962 /* SnapItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnapItUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E55B9B1CEDDA8C004E8962 /* SnapItUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnapItUITests.m; sourceTree = "<group>"; };
 		84E55B9D1CEDDA8C004E8962 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D0414F601CF48454001FF63E /* PostingSampleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostingSampleController.h; sourceTree = "<group>"; };
+		D0414F611CF48454001FF63E /* PostingSampleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostingSampleController.m; sourceTree = "<group>"; };
+		D0C9FF5D1CF4772500067DD3 /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		D0C9FF5E1CF4772500067DD3 /* Place.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		D0C9FF601CF477A600067DD3 /* SortingSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SortingSupport.h; sourceTree = "<group>"; };
+		D0C9FF611CF477A600067DD3 /* SortingSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SortingSupport.m; sourceTree = "<group>"; };
+		D0C9FF631CF4782500067DD3 /* LocationInfoProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationInfoProvider.h; sourceTree = "<group>"; };
+		D0C9FF641CF4782500067DD3 /* LocationInfoProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationInfoProvider.m; sourceTree = "<group>"; };
 		D0CE07A11CEDE1B000ECEC78 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		D0CE07A21CEDE1B000ECEC78 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		D0CE07A41CEDE1B000ECEC78 /* Rating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rating.h; sourceTree = "<group>"; };
@@ -170,10 +176,8 @@
 				84E55B841CEDDA8C004E8962 /* LaunchScreen.storyboard */,
 				84E55B871CEDDA8C004E8962 /* Info.plist */,
 				84E55B7F1CEDDA8C004E8962 /* SnapIt.xcdatamodeld */,
-				84340DD21CF04E3900FF6354 /* Place+CoreDataProperties.h */,
-				84340DD31CF04E3900FF6354 /* Place+CoreDataProperties.m */,
-				84340DD41CF04E3900FF6354 /* Place.h */,
-				84340DD51CF04E3900FF6354 /* Place.m */,
+				D0C9FF5D1CF4772500067DD3 /* Place.h */,
+				D0C9FF5E1CF4772500067DD3 /* Place.m */,
 				D0CE07A71CEDE1B000ECEC78 /* Picture.h */,
 				D0CE07A81CEDE1B000ECEC78 /* Picture.m */,
 				D0CE07A41CEDE1B000ECEC78 /* Rating.h */,
@@ -181,6 +185,12 @@
 				D0CE07A11CEDE1B000ECEC78 /* User.h */,
 				D0CE07A21CEDE1B000ECEC78 /* User.m */,
 				84E55B731CEDDA8C004E8962 /* Supporting Files */,
+				D0C9FF601CF477A600067DD3 /* SortingSupport.h */,
+				D0C9FF611CF477A600067DD3 /* SortingSupport.m */,
+				D0C9FF631CF4782500067DD3 /* LocationInfoProvider.h */,
+				D0C9FF641CF4782500067DD3 /* LocationInfoProvider.m */,
+				D0414F601CF48454001FF63E /* PostingSampleController.h */,
+				D0414F611CF48454001FF63E /* PostingSampleController.m */,
 			);
 			path = SnapIt;
 			sourceTree = "<group>";
@@ -341,21 +351,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0C9FF5F1CF4772500067DD3 /* Place.m in Sources */,
 				8446FA051CEFA28800198096 /* PlaceCardViewController.m in Sources */,
 				845964C01CEF0F570070DC72 /* MenuRealizationViewController.m in Sources */,
 				84A515D31CEEF212008C6743 /* MenuViewController.m in Sources */,
 				D0CE07A91CEDE1B000ECEC78 /* Picture.m in Sources */,
 				8446FA021CEF9E3300198096 /* MyMarksViewController.m in Sources */,
+				D0414F621CF48454001FF63E /* PostingSampleController.m in Sources */,
 				84E55B7B1CEDDA8C004E8962 /* LoginViewController.m in Sources */,
+				D0C9FF651CF4782500067DD3 /* LocationInfoProvider.m in Sources */,
 				84A515D61CEEF5EA008C6743 /* RegistrateViewController.m in Sources */,
-				84340DD71CF04E3900FF6354 /* Place.m in Sources */,
 				D0CE07A31CEDE1B000ECEC78 /* User.m in Sources */,
 				84E55B781CEDDA8C004E8962 /* AppDelegate.m in Sources */,
 				84595F661CEF313B003E9DAF /* PlaceListViewController.m in Sources */,
 				84E55B811CEDDA8C004E8962 /* SnapIt.xcdatamodeld in Sources */,
 				844B06581CEFBB11007D1004 /* MapViewController.m in Sources */,
-				84340DD61CF04E3900FF6354 /* Place+CoreDataProperties.m in Sources */,
 				D0CE07A61CEDE1B000ECEC78 /* Rating.m in Sources */,
+				D0C9FF621CF477A600067DD3 /* SortingSupport.m in Sources */,
 				84E55B751CEDDA8C004E8962 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
