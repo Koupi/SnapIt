@@ -30,7 +30,16 @@
     place = [app getCurrentPlace];
     pictures = [place.pictures allObjects];
     [_lblLocation setText:place.location];
-    [_lblRating setText:[NSString stringWithFormat:@"%@", place.rating]];
+    [_lblRating setText:[NSString stringWithFormat:@"%.1f", [place.rating doubleValue]]];
+    int mark = [app getRatingByUserOfPlace:place];
+    if(mark >= 0) {
+        [_lblMark setText:[NSString stringWithFormat:@"%d", mark]];
+        [_stepperMark setValue:(double)mark];
+    }
+    else {
+        [_lblMark setText:@"0"];
+        [_stepperMark setValue:0];
+    }
     [_navTitle setTitle:place.name];
 }
 
@@ -44,6 +53,7 @@
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
+    [_lblRating setText:[NSString stringWithFormat:@"%.1f", [place.rating doubleValue]]];
 }
 - (IBAction)markValueChanged:(id)sender {
     [_lblMark setText:[NSString stringWithFormat:@"%.0f",[_stepperMark value]]];
@@ -64,6 +74,7 @@
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
+    [_photos reloadData];
 }
 - (IBAction)shareFb:(id)sender {
     //?????????????

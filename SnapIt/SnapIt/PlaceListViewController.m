@@ -52,7 +52,7 @@
     Place *place = (Place *)[places objectAtIndex:indexPath.row];
 
     cell.nameLabel.text = place.name;
-    cell.detailLabel.text = [NSString stringWithFormat:@"Rating: %@", place.rating];
+    cell.detailLabel.text = [NSString stringWithFormat:@"Rating: %.1f", [place.rating doubleValue]];
     if([place.pictures count] > 0) {
         cell.photoImageView.image = [UIImage imageWithData:((Picture *)[place.pictures anyObject]).image];
     }

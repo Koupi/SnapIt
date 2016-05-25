@@ -60,7 +60,7 @@
     NSArray* sortedRecords = [[NSMutableArray arrayWithArray:places]  sortedArrayUsingComparator: ^(id obj1, id obj2)
                               {
                                   double distance1 = [SortingSupport getDistanceQWOfPlace:obj1 byLatitude:latitude andLongitude:longitude];
-                                  double distance2 = [SortingSupport getDistanceQWOfPlace:obj1 byLatitude:latitude andLongitude:longitude];
+                                  double distance2 = [SortingSupport getDistanceQWOfPlace:obj2 byLatitude:latitude andLongitude:longitude];
                                   return [SortingSupport compareDoubleOne: distance1 withDoubleTwo:distance2];
                               }];
     

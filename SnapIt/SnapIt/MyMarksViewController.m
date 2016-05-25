@@ -91,7 +91,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath) {
-        //[app setSelectedBook:booksResult[indexPath.row]];
+        [app setCurrentPlace:places[indexPath.row]];
+        [self performSegueWithIdentifier:@"myMarksToPlaceCard" sender:self];
     }
 }
 
