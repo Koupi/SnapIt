@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Place.h"
 #import "Picture.h"
+#import "PlaceTableViewCell.h"
 
 @interface MyMarksViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
