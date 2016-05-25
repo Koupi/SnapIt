@@ -11,7 +11,6 @@
 @interface MyMarksViewController () {
     NSArray *places;
     AppDelegate *app;
-    LocationInfoProvider *loc;
 }
 @property (strong, nonatomic) IBOutlet UITableView *tableResult;
 
@@ -22,9 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    loc = [[LocationInfoProvider alloc] init];
-    places = [app getPlacesMarkedByUser];
-    [SortingSupport sortPlacesByDistance:places byLatitude:[loc getLatitude] andLongitude:[loc getLongitude]];
+    places = [app getPlacesMarkedByUserSortByDistance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,9 +30,9 @@
 }
 - (IBAction)sortValueChanged:(UISegmentedControl *)sender {
     if ([sender selectedSegmentIndex] == 0) {
-        [SortingSupport sortPlacesByDistance:places byLatitude:[loc getLatitude] andLongitude:[loc getLongitude]];
+        places = [app getPlacesSortByDistance:places];
     } else {
-        [SortingSupport sortPlacesByRatingMarkedByUser:places];
+        places = [app getPlacesMarkedByUserSortByRating:places];
     }
     [_tableResult reloadData];
 }
@@ -57,7 +54,7 @@
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@, rating:%@", place.name, place.rating];
     if([place.pictures count] > 0) {
-        //cell.imageView.image = [place.pictures anyObject];
+        cell.imageView.image = [UIImage imageWithData:((Picture *)[place.pictures anyObject]).image];
     }
     return cell;
 }
@@ -71,19 +68,18 @@
 - (void)searchForPlaceWithName:(NSString *)name {
     if([name length] <= 0) {
         places = [app getPlacesMarkedByUser];
-        [SortingSupport sortPlacesByDistance:places byLatitude:[loc getLatitude] andLongitude:[loc getLongitude]];
         [_tableResult reloadData];
         return;
     }
-    places = [app getPlacesMarkedByUser];
-    NSMutableArray *buf = [[NSMutableArray alloc] init];
+    places = [app getPlaceByUserByName:name];
+   /* NSMutableArray *buf = [[NSMutableArray alloc] init];
     for(id ob in places) {
         Place *place = (Place *)ob;
         if([place.name containsString:name]) {
             [buf addObject:place];
         }
     }
-    places = [NSArray arrayWithArray:buf];
+    places = [NSArray arrayWithArray:buf];*/
     [_tableResult reloadData];
 }
 
