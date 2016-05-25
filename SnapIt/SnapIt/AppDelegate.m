@@ -21,7 +21,7 @@
 @end
 
 @implementation AppDelegate
-
+//+
 -(void) setCurrentPlace:(Place *)place
 {
     currentPlace = place;
@@ -31,7 +31,7 @@
     return currentPlace;
 }
 
-//get user
+//get user+
 -(BOOL)getUserByLogin:(NSString*) login andPassword: (NSString*) password
 {
     
@@ -53,7 +53,7 @@
     
 }
 
-//add user or false if noy unique
+//add user or false if noy unique+
 -(BOOL) addUserByLogin:(NSString*) login andPassword: (NSString*) password andEmail: (NSString*) email andFbPassword:(NSString*)fbpassword
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -75,6 +75,7 @@
     [self saveContext];
     return true;
 }
+//+
 -(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude andName:(NSString *)name
 {
     Place * newPlace = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
@@ -85,42 +86,51 @@
     [self saveContext];
     
 }
--(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude
-{
-    Place * newPlace = [NSEntityDescription insertNewObjectForEntityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
-    newPlace.latitude = [NSNumber numberWithDouble: latitude];
-    newPlace.longitude = [NSNumber numberWithDouble: longitude];
-    newPlace.location = location;
-    [self saveContext];
-    
-}
+//++
 -(void) addPhoto: (NSData*) photo ByPlace: (Place*) place
 {
-    NSMutableSet* pictures =  [place mutableSetValueForKey:@"pictures"];
-    [pictures addObject:photo];
+    Picture * newPicture = [NSEntityDescription insertNewObjectForEntityForName:@"Picture" inManagedObjectContext:self.managedObjectContext];
+    newPicture.image = photo;
+    [self saveContext];
+    [place addPicturesObject:newPicture];
     [self saveContext];
 }
--(void) addRating: (int) rating ByPlace: (Place*) place andUser:(User*) user
+//++
+-(void) addRating: (int) rating ByPlace: (Place*) place
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(place == %@ && user == %@)", place, user]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(place == %@ && user == %@)", place, currentUser]];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Rating" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
     NSError* error;
     NSArray *marks = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     if([marks count]!=0)
     {
+        NSLog(@"+");
+        
+        double oldAvRaring = [place rating].doubleValue;
+        double count = [[place ratings] count];
+        double oldRating = [marks[0] rating].doubleValue;
+        double newAvRating = oldAvRaring-oldRating/count+((double)rating)/count;
         [marks[0] setValue: [NSNumber numberWithInt: rating] forKey: @"rating"];
+        [place setValue:[NSNumber numberWithDouble: newAvRating] forKey:@"rating"];
         [self saveContext];
         return;
     }
+    double oldAvRaring = [place rating].doubleValue;
+    double oldCount = [[place ratings] count];
+    double newAvRating = oldAvRaring*oldCount/(oldCount+1)+rating/(oldCount+1);
+    [place setValue:[NSNumber numberWithDouble: newAvRating] forKey:@"rating"];
     Rating * newRating = [NSEntityDescription insertNewObjectForEntityForName:@"Rating" inManagedObjectContext:self.managedObjectContext];
     newRating.rating = [NSNumber numberWithInt: rating];
+    [currentUser addRatingsObject:newRating];
+    [place addRatingsObject:newRating];
     [newRating setValue: place forKey:@"place"];
-    [newRating setValue: user forKey:@"user"];
+    [newRating setValue: currentUser forKey:@"user"];
     
     [self saveContext];
 }
+//++
 -(NSArray*)getAllPlaces
 {
     
@@ -137,7 +147,7 @@
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(name like[cd] %@)", name]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(name CONTAINS[c] %@)", name]];
     [fetchRequest setEntity:entity];
     NSError* error;
     NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -145,7 +155,20 @@
     return fetchedRecords;
     
 }
-//места оцененные пользователем для карты
+-(NSArray*) getPlaceByUserByName: (NSString*) name
+{
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Place" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"(name CONTAINS[c] %@) && (ANY ratings.user == %@)", name, currentUser]];
+    [fetchRequest setEntity:entity];
+    NSError* error;
+    NSArray *fetchedRecords = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    return fetchedRecords;
+    
+}
+//места оцененные пользователем для карты++
 -(NSArray*)getPlacesMarkedByUser
 {
     
@@ -161,25 +184,7 @@
 //средний рейтинг места по всем оценкам
 -(double) getAveregeRatingByPlace: (Place* ) place
 {
-    //вывести весь fetchRequest. Что выдаёт?
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    request.entity = [NSEntityDescription entityForName:@"Rating"
-                                 inManagedObjectContext:self.managedObjectContext];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"(place == %@)", place]];
-    request.resultType = NSDictionaryResultType;
-    NSExpressionDescription* averageExpressionDescription =
-    [[NSExpressionDescription alloc] init];
-    [averageExpressionDescription setName:@"averageRating"];
-    [averageExpressionDescription
-     setExpression:[NSExpression expressionForFunction:@"average:"
-                                             arguments:[NSArray arrayWithObject:
-                                                        [NSExpression expressionForKeyPath:@"Rating"]]]];
-    [averageExpressionDescription setExpressionResultType:NSFloatAttributeType];
-    request.propertiesToFetch = [NSArray arrayWithObject:averageExpressionDescription] ;
-    NSArray* results = [self.managedObjectContext executeFetchRequest:request error:nil];
-    NSDictionary* fetchResultsDictionary = [results objectAtIndex:0];
-    return [[fetchResultsDictionary
-             objectForKey:@"averageRating"] floatValue];
+    return [place rating].doubleValue;
 }
 //рейтинг конкретного места от текущего пользователя
 -(int)getRatingByUserOfPlace:(Place* ) place
@@ -204,10 +209,18 @@
     NSArray *fetchedRecords = [self getAllPlaces];
     return [SortingSupport sortPlacesByAveregeRating:fetchedRecords];
 }
+-(NSArray*)getPlacesSortByAveregeRating:(NSArray* ) places
+{
+    return [SortingSupport sortPlacesByAveregeRating:places];
+}
 -(NSArray*)getPlacesMarkedByUserSortByRating
 {
     NSArray *fetchedRecords = [self getPlacesMarkedByUser];
     return [SortingSupport sortPlacesByRatingMarkedByUser:fetchedRecords];
+}
+-(NSArray*)getPlacesMarkedByUserSortByRating:(NSArray*) places
+{
+    return [SortingSupport sortPlacesByRatingMarkedByUser:places];
 }
 -(NSArray*)getPlacesSortByDistance
 {
@@ -216,6 +229,13 @@
     double latitude = location.getLatitude;
     double longitude = location.getLongitude;
     return [SortingSupport sortPlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude];
+}
+-(NSArray*)getPlacesSortByDistance:(NSArray*)places
+{
+    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
+    double latitude = location.getLatitude;
+    double longitude = location.getLongitude;
+    return [SortingSupport sortPlacesByDistance:places byLatitude: latitude andLongitude:longitude];
 }
 -(NSArray*)getPlacesMarkedByUserSortByDistance
 {

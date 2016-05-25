@@ -30,7 +30,7 @@
 -(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude;
 -(void) addPlaceByLocation: (NSString*) location andLatitude: (double) latitude andLongitude:(double) longitude andName:(NSString *)name;
 -(void) addPhoto: (NSData*) photo ByPlace: (Place*) place;
--(void) addRating: (int) rating ByPlace: (Place*) place andUser:(User*) user;
+-(void) addRating: (int) rating ByPlace: (Place*) place;
 -(NSArray*)getAllPlaces;
 -(NSArray*)getPlacesMarkedByUser;
 -(double) getAveregeRatingByPlace: (Place* ) place;
@@ -40,6 +40,11 @@
 -(NSArray*)getPlacesSortByDistance;
 -(NSArray*)getPlacesMarkedByUserSortByDistance;
 -(NSArray*)getNearestPlacesByRadius: (double) radius;
+-(NSArray*) getPlaceByName: (NSString*) name;
+-(NSArray*) getPlaceByUserByName: (NSString*) name;
+-(NSArray*)getPlacesSortByAveregeRating:(NSArray* ) places;
+-(NSArray*)getPlacesMarkedByUserSortByRating:(NSArray*) places;
+-(NSArray*)getPlacesSortByDistance:(NSArray*)places;
 @end
 
 

@@ -39,7 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)ratePlace:(id)sender {
-    //[app addRating:(int)[_stepperMark value] ByPlace:place andUser:nil];
+    [app addRating:(int)[_stepperMark value] ByPlace:place];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"You've rated this place successfully." preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];
@@ -58,7 +58,7 @@
                    editingInfo:(NSDictionary *)editingInfo
 {
     NSData *img = UIImagePNGRepresentation(image);
-    //[app addPhoto:img ByPlace:place];
+    [app addPhoto:img ByPlace:place];
     [self dismissModalViewControllerAnimated:YES];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"You've added your photo to this place successfully." preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
@@ -81,7 +81,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:CellIdentifier];
     }
-    cell.imageView.image = pictures[indexPath.row];
+    cell.imageView.image = [UIImage imageWithData:((Picture *)pictures[indexPath.row]).image];
     return cell;
 }
 

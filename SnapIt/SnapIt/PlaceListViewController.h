@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 #import "Place.h"
-#import "SortingSupport.h"
-#import "LocationInfoProvider.h"
+#import "Picture.h"
 
 @interface PlaceListViewController : UIViewController <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
