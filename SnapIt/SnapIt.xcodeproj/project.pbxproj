@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		84340DD11CF0487000FF6354 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84340DD01CF0487000FF6354 /* CoreLocation.framework */; };
+		8441C4F91CF601E100C9EABF /* PlaceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8441C4F81CF601E100C9EABF /* PlaceTableViewCell.xib */; };
+		8441C4FC1CF6048100C9EABF /* PlaceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441C4FB1CF6048100C9EABF /* PlaceTableViewCell.m */; };
+		8441C4FE1CF60EEE00C9EABF /* PhotoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8441C4FD1CF60EEE00C9EABF /* PhotoTableViewCell.xib */; };
+		8441C5011CF6105800C9EABF /* PhotoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8441C5001CF6105800C9EABF /* PhotoTableViewCell.m */; };
 		8446FA021CEF9E3300198096 /* MyMarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446FA011CEF9E3300198096 /* MyMarksViewController.m */; };
 		8446FA051CEFA28800198096 /* PlaceCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8446FA041CEFA28800198096 /* PlaceCardViewController.m */; };
 		844B06571CEFB875007D1004 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844B06561CEFB875007D1004 /* MapKit.framework */; };
@@ -53,6 +57,12 @@
 
 /* Begin PBXFileReference section */
 		84340DD01CF0487000FF6354 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		8441C4F81CF601E100C9EABF /* PlaceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceTableViewCell.xib; sourceTree = "<group>"; };
+		8441C4FA1CF6048100C9EABF /* PlaceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceTableViewCell.h; sourceTree = "<group>"; };
+		8441C4FB1CF6048100C9EABF /* PlaceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceTableViewCell.m; sourceTree = "<group>"; };
+		8441C4FD1CF60EEE00C9EABF /* PhotoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoTableViewCell.xib; sourceTree = "<group>"; };
+		8441C4FF1CF6105800C9EABF /* PhotoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTableViewCell.h; sourceTree = "<group>"; };
+		8441C5001CF6105800C9EABF /* PhotoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoTableViewCell.m; sourceTree = "<group>"; };
 		8446FA001CEF9E3300198096 /* MyMarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMarksViewController.h; sourceTree = "<group>"; };
 		8446FA011CEF9E3300198096 /* MyMarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMarksViewController.m; sourceTree = "<group>"; };
 		8446FA031CEFA28800198096 /* PlaceCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceCardViewController.h; sourceTree = "<group>"; };
@@ -154,6 +164,9 @@
 			isa = PBXGroup;
 			children = (
 				84E55B761CEDDA8C004E8962 /* AppDelegate.h */,
+				8441C4FD1CF60EEE00C9EABF /* PhotoTableViewCell.xib */,
+				8441C4FF1CF6105800C9EABF /* PhotoTableViewCell.h */,
+				8441C5001CF6105800C9EABF /* PhotoTableViewCell.m */,
 				84A515D41CEEF5EA008C6743 /* RegistrateViewController.h */,
 				84A515D51CEEF5EA008C6743 /* RegistrateViewController.m */,
 				84E55B771CEDDA8C004E8962 /* AppDelegate.m */,
@@ -166,6 +179,9 @@
 				84595F651CEF313B003E9DAF /* PlaceListViewController.m */,
 				8446FA001CEF9E3300198096 /* MyMarksViewController.h */,
 				8446FA011CEF9E3300198096 /* MyMarksViewController.m */,
+				8441C4F81CF601E100C9EABF /* PlaceTableViewCell.xib */,
+				8441C4FA1CF6048100C9EABF /* PlaceTableViewCell.h */,
+				8441C4FB1CF6048100C9EABF /* PlaceTableViewCell.m */,
 				845964BE1CEF0F570070DC72 /* MenuRealizationViewController.h */,
 				845964BF1CEF0F570070DC72 /* MenuRealizationViewController.m */,
 				84A515D11CEEF212008C6743 /* MenuViewController.h */,
@@ -326,7 +342,9 @@
 			files = (
 				84E55B861CEDDA8C004E8962 /* LaunchScreen.storyboard in Resources */,
 				84E55B831CEDDA8C004E8962 /* Assets.xcassets in Resources */,
+				8441C4FE1CF60EEE00C9EABF /* PhotoTableViewCell.xib in Resources */,
 				84E55B7E1CEDDA8C004E8962 /* Main.storyboard in Resources */,
+				8441C4F91CF601E100C9EABF /* PlaceTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8441C5011CF6105800C9EABF /* PhotoTableViewCell.m in Sources */,
 				D0C9FF5F1CF4772500067DD3 /* Place.m in Sources */,
 				8446FA051CEFA28800198096 /* PlaceCardViewController.m in Sources */,
 				845964C01CEF0F570070DC72 /* MenuRealizationViewController.m in Sources */,
@@ -369,6 +388,7 @@
 				D0CE07A61CEDE1B000ECEC78 /* Rating.m in Sources */,
 				D0C9FF621CF477A600067DD3 /* SortingSupport.m in Sources */,
 				84E55B751CEDDA8C004E8962 /* main.m in Sources */,
+				8441C4FC1CF6048100C9EABF /* PlaceTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

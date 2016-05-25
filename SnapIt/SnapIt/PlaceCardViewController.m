@@ -75,14 +75,18 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"PhotoTableViewCell";
+    PhotoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PhotoTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
-    cell.imageView.image = [UIImage imageWithData:((Picture *)pictures[indexPath.row]).image];
+    cell.photoImageView.image = [UIImage imageWithData:((Picture *)pictures[indexPath.row]).image];
     return cell;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 320;
 }
 
 /*

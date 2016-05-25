@@ -44,20 +44,26 @@
     return 1;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"PlaceTableViewCell";
+    PlaceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PlaceTableViewCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     Place *place = (Place *)[places objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, rating:%@", place.name, place.rating];
+    cell.nameLabel.text = place.name;
+    cell.detailLabel.text = [NSString stringWithFormat:@"My mark: %d", [app getRatingByUserOfPlace:place]];
     if([place.pictures count] > 0) {
-        cell.imageView.image = [UIImage imageWithData:((Picture *)[place.pictures anyObject]).image];
+        cell.photoImageView.image = [UIImage imageWithData:((Picture *)[place.pictures anyObject]).image];
     }
     return cell;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 105;
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self searchForPlaceWithName:[searchBar text]];
     
