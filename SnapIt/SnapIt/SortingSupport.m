@@ -51,8 +51,9 @@
 }
 +(double)getDistanceQWOfPlace:(Place* ) place byLatitude: (double)latitude andLongitude:(double) longitude
 {
-    
+
     double distance = pow(place.latitude.doubleValue-latitude,2.0)+pow(place.longitude.doubleValue-longitude, 2.0);
+
     return distance;
 }
 +(NSArray*)sortPlacesByDistance:(NSArray*) places byLatitude: (double)latitude andLongitude:(double) longitude
@@ -61,7 +62,7 @@
                               {
                                   double distance1 = [SortingSupport getDistanceQWOfPlace:obj1 byLatitude:latitude andLongitude:longitude];
                                   double distance2 = [SortingSupport getDistanceQWOfPlace:obj2 byLatitude:latitude andLongitude:longitude];
-                                  return [SortingSupport compareDoubleOne: distance1 withDoubleTwo:distance2];
+                                  return [SortingSupport compareDoubleOne: distance2 withDoubleTwo:distance1];
                               }];
     
     return sortedRecords;
