@@ -11,7 +11,7 @@
 #import "Place.h"
 #import "Picture.h"
 #import "PhotoTableViewCell.h"
-
+#import <Social/Social.h>
 @interface PlaceCardViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @end

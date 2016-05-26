@@ -12,6 +12,8 @@
     AppDelegate *app;
     Place *place;
     NSArray *pictures;
+    UIImage *lastImage;
+    int lastMark;
 }
 @property (strong, nonatomic) IBOutlet UILabel *lblRating;
 @property (strong, nonatomic) IBOutlet UILabel *lblLocation;
@@ -41,6 +43,8 @@
         [_stepperMark setValue:0];
     }
     [_navTitle setTitle:place.name];
+    lastImage = nil;
+    lastMark = -1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +53,7 @@
 }
 - (IBAction)ratePlace:(id)sender {
     [app addRating:(int)[_stepperMark value] ByPlace:place];
+    lastMark = (int)[_stepperMark value];
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"" message:@"You've rated this place successfully." preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];
@@ -67,6 +72,7 @@
          didFinishPickingImage:(UIImage *)image
                    editingInfo:(NSDictionary *)editingInfo
 {
+    lastImage = image;
     NSData *img = UIImagePNGRepresentation(image);
     [app addPhoto:img ByPlace:place];
     [self dismissModalViewControllerAnimated:YES];
@@ -74,10 +80,44 @@
     UIAlertAction *defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * action) {}];
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
+    pictures = [place.pictures allObjects];
     [_photos reloadData];
 }
 - (IBAction)shareFb:(id)sender {
-    //?????????????
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook])
+    {
+        SLComposeViewController *tweet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        NSString *initialString = [NSString stringWithFormat:@"Hi from %@ (%@)!", place.name, place.location];
+        if(lastMark != -1)
+            initialString = [NSString stringWithFormat:@"%@\nI rated this place with mark: %d", initialString, lastMark];
+        if(lastImage != nil) {
+            [tweet addImage:lastImage];
+            initialString = [NSString stringWithFormat:@"%@\nLook at the photo I've made!", initialString];
+        }
+        [tweet setInitialText:initialString];
+        [tweet setCompletionHandler:^(SLComposeViewControllerResult result)
+         {
+             if (result == SLComposeViewControllerResultCancelled)
+             {
+                 NSLog(@"The user cancelled.");
+             }
+             else if (result == SLComposeViewControllerResultDone)
+             {
+                 NSLog(@"The user posted to Facebook");
+             }
+         }];
+        [self presentViewController:tweet animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Facebook"
+                                                        message:@"Facebook integration is not available.  A Facebook account must be set up on your device."
+                                                       delegate:self
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [pictures count];

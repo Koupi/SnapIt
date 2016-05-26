@@ -16,6 +16,7 @@
 @interface AppDelegate () {
     User *currentUser;
     Place *currentPlace;
+    LocationInfoProvider* locationInfo;
 }
 
 @end
@@ -47,6 +48,7 @@
     }
     else
     {
+        locationInfo = [ [LocationInfoProvider alloc] init];
         currentUser = fetchedRecords[0];
         return YES;
     }
@@ -225,32 +227,28 @@
 -(NSArray*)getPlacesSortByDistance
 {
     NSArray *fetchedRecords = [self getAllPlaces];
-    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
-    double latitude = location.getLatitude;
-    double longitude = location.getLongitude;
+    double latitude = locationInfo.getLatitude;
+    double longitude = locationInfo.getLongitude;
     return [SortingSupport sortPlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude];
 }
 -(NSArray*)getPlacesSortByDistance:(NSArray*)places
 {
-    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
-    double latitude = location.getLatitude;
-    double longitude = location.getLongitude;
+    double latitude = locationInfo.getLatitude;
+    double longitude = locationInfo.getLongitude;
     return [SortingSupport sortPlacesByDistance:places byLatitude: latitude andLongitude:longitude];
 }
 -(NSArray*)getPlacesMarkedByUserSortByDistance
 {
     NSArray *fetchedRecords = [self getPlacesMarkedByUser];
-    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
-    double latitude = location.getLatitude;
-    double longitude = location.getLongitude;
+    double latitude = locationInfo.getLatitude;
+    double longitude = locationInfo.getLongitude;
     return [SortingSupport sortPlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude];
 }
 -(NSArray*)getNearestPlacesByRadius: (double) radius
 {
     NSArray *fetchedRecords = [self getPlacesMarkedByUser];
-    LocationInfoProvider *location = [ [LocationInfoProvider alloc] init];
-    double latitude = location.getLatitude;
-    double longitude = location.getLongitude;
+    double latitude = locationInfo.getLatitude;
+    double longitude = locationInfo.getLongitude;
     return [SortingSupport choosePlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude andRadius: radius];
 }
 
@@ -261,8 +259,10 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self addUserByLogin:@"login" andPassword:@"password" andEmail:@"maria-cco@mail.ru" andFbPassword:@""];
-        [self addPlaceByLocation:@"Minsk" andLatitude:53.908572 andLongitude:27.574929 andName:@"The Victory Square"];
-        [self addPlaceByLocation:@"Minsk" andLatitude:53.895157 andLongitude:27.545816 andName:@"The Independence Square"];
+        [self addPlaceByLocation:@"Minsk, Belarus" andLatitude:53.908572 andLongitude:27.574929 andName:@"The Victory Square"];
+        [self addPlaceByLocation:@"Minsk, Belarus" andLatitude:53.895157 andLongitude:27.545816 andName:@"The Independence Square"];
+        [self addPlaceByLocation:@"Moscow, Russia" andLatitude:55.753948 andLongitude:37.621010 andName:@"The Red Square"];
+        [self addPlaceByLocation:@"London, UK" andLatitude:51.500803 andLongitude:-0.124454 andName:@"Big Ben"];
     }
     
     return YES;

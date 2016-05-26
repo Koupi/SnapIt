@@ -26,16 +26,19 @@
             [self.locationManager requestWhenInUseAuthorization];
         }
     }
+    [self.locationManager startUpdatingLocation];
     return self;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[[locations count] - 1];
+
     if (location != nil)
     {
         self.latitude = location.coordinate.latitude;
         self.longitude = location.coordinate.longitude;
+     
         [self.locationManager stopUpdatingLocation];
     }
     
@@ -43,13 +46,17 @@
 
 -(double) getLatitude
 {
+
     [self.locationManager startUpdatingLocation];
+
     return [self latitude];
 }
 
 -(double) getLongitude
 {
+ 
     [self.locationManager startUpdatingLocation];
+ 
     return [self longitude];
 }
 @end
