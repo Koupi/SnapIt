@@ -72,6 +72,7 @@
     NSMutableArray* choosenResults = [NSMutableArray array];
     [places enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL*stop)
      {
+        /*NSLog(@" dist %f", [SortingSupport getDistanceQWOfPlace:obj byLatitude:latitude andLongitude:longitude]);*/
          if([SortingSupport getDistanceQWOfPlace:obj byLatitude:latitude andLongitude:longitude]<radius)
          {
              [choosenResults addObject:obj];

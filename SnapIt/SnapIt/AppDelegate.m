@@ -246,7 +246,7 @@
 }
 -(NSArray*)getNearestPlacesByRadius: (double) radius
 {
-    NSArray *fetchedRecords = [self getPlacesMarkedByUser];
+    NSArray *fetchedRecords = [self getAllPlaces];
     double latitude = locationInfo.getLatitude;
     double longitude = locationInfo.getLongitude;
     return [SortingSupport choosePlacesByDistance:fetchedRecords byLatitude: latitude andLongitude:longitude andRadius: radius];
