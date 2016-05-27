@@ -40,6 +40,31 @@ NSMutableArray* locations;
     }
 }
 
+-(double) getDistance: (double) latA: (double) lonA: (double) latB: (double) lonB {
+    double distance = sqrt((latA - latB)*(latA - latB) + (lonA - lonB)*(lonA-lonB));
+    return distance;
+}
+
+- (IBAction)handleLongPressGesture:(id)sender {
+    CGPoint point =[sender locationInView: self.map];
+    CLLocationCoordinate2D coord = [self.map convertPoint:point toCoordinateFromView:self.map];
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:coord.latitude longitude: coord.longitude];
+    Place *nearest;
+    CLLocationDistance minDist = 10000000;
+    for(id obj in places) {
+        Place *place = (Place *)obj;
+        CLLocation *current = [[CLLocation alloc] initWithLatitude:[place.latitude doubleValue] longitude:[place.longitude doubleValue]];
+        CLLocationDistance dist = [loc distanceFromLocation:current];
+        if(dist < minDist) {
+             minDist = dist;
+             nearest = obj;
+        }
+    }
+    [app setCurrentPlace:nearest];
+    [self performSegueWithIdentifier:@"mapToPlaceCard" sender:self];
+    
+}
+
 - (IBAction)sortValueChanged:(id)sender {
     if([sender selectedSegmentIndex] == 0) {
         places = [app getAllPlaces];
