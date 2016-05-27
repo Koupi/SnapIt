@@ -17,33 +17,44 @@
 @end
 
 @implementation MapViewController
+NSArray *places;
+NSMutableArray* locations;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSArray *places = [app getAllPlaces];
-     
-     NSMutableArray* locations = [NSMutableArray array];
-     
-     [places enumerateObjectsUsingBlock:^(Place *obj, NSUInteger idx, BOOL*stop)
-     {
-     [locations addObject:MakeLocation([obj.latitude doubleValue], [obj.longitude doubleValue])];
-     }];
-     
-     for (int i=0; i<[locations count]; i++) {
-     MKPointAnnotation* annotation= [MKPointAnnotation new];
-     annotation.coordinate= [locations[i] coordinate];
-     [_map addAnnotation: annotation];
-     }
-/*
-    
-    NSArray* locations = [[NSArray alloc] initWithObjects: MakeLocation(53.908572, 27.574929), MakeLocation(53.895157, 27.545816), nil];
-    
+     app = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+     places = [app getAllPlaces];
+     [self showPlaces:places];
+    }
+
+- (void) showPlaces: (NSArray *) places {
+    [_map removeAnnotations:[_map annotations]];
+    locations = [NSMutableArray array];
+    [places enumerateObjectsUsingBlock:^(Place *obj, NSUInteger idx, BOOL*stop) {
+        [locations addObject:MakeLocation([obj.latitude doubleValue], [obj.longitude doubleValue])];
+    }];
     for (int i=0; i<[locations count]; i++) {
         MKPointAnnotation* annotation= [MKPointAnnotation new];
         annotation.coordinate= [locations[i] coordinate];
         [_map addAnnotation: annotation];
-    }*/
+    }
 }
 
+- (IBAction)sortValueChanged:(id)sender {
+    if([sender selectedSegmentIndex] == 0) {
+        places = [app getAllPlaces];
+        [self showPlaces:places];
+    } else if ([sender selectedSegmentIndex] == 1) {
+        places = [app getPlacesMarkedByUser];
+        [self showPlaces:places];
+    } else {
+        places = [app getNearestPlacesByRadius:10000];
+        [self showPlaces:places];
+    }
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    places = [app getPlaceByName:[searchBar text]];
+    [self showPlaces:places];
+}
 @end

@@ -11,6 +11,6 @@
 #import "Place.h"
 #import "MapKit/MapKit.h"
 
-@interface MapViewController : UIViewController
+@interface MapViewController : UIViewController <UISearchBarDelegate>
 
 @end
